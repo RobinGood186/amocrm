@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 // можно сделать кнопочку для получения ключа на сайте в супер-админ панеле к примеру, тогда через POST сделать можно
-Route::get('/get_token',\App\Http\Controllers\Auth\IndexController::class)->name('main.index');
+Route::get('/get_token',\App\Http\Controllers\Auth\IndexController::class);
 
+Route::get('/',\App\Http\Controllers\AmoCRM\IndexController::class)->name('amocrm.index');
