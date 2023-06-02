@@ -43,6 +43,14 @@ class Service
                 ]]
         ]);
     }
-
+    public function MethodTasks($data)
+    {
+        Http::withToken(config('amocrm.token'))->post('https://' . config('amocrm.domain') . '.amocrm.ru/api/v4/tasks', [
+            "_embedded" => [
+                "text" => 'имя: '.$data['name']. ',  телефон для связи: ' . $data['tel'],
+                "complete_till" => 1988885140, // дата задачи в UNIX (рандомная дата), можно ставить сегоднешнюю, вообщем от требований
+            ]
+        ]);
+    }
 
 }
