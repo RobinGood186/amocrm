@@ -19,8 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'tel',
     ];
 
     /**
@@ -29,8 +28,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+
     ];
 
     /**
@@ -39,6 +37,15 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+
     ];
+
+    public function createRequest($data)
+    {
+        $user = User::query()->create([
+            'name' => $data['name'],
+            'tel' => $data['tel'],
+        ]);
+        $user->save();
+    }
 }
