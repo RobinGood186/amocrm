@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/get_token',\App\Http\Controllers\Auth\IndexController::class);
 
 Route::get('/',\App\Http\Controllers\AmoCRM\IndexController::class)->name('amocrm.index');
+Route::post('/',\App\Http\Controllers\AmoCRM\StoreController::class)->name('amocrm.store');
