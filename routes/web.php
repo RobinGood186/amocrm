@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// можно сделать кнопочку для получения ключа на сайте в супер-админ панеле к примеру, тогда через POST сделать можно
+Route::get('/get_token',\App\Http\Controllers\Auth\IndexController::class)->name('main.index');
+
