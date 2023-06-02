@@ -17,6 +17,32 @@ class Service
         ]);
         file_put_contents('../tokenAmoCRM.txt', $response->json('access_token'));
     }
+    public function MethodLeadsComplex($data)
+    {
+        Http::withToken(config('amocrm.token'))->post('https://' . config('amocrm.domain') . '.amocrm.ru/api/v4/leads/complex', [
+            "_embedded" => [
+                "name" => "Форма", //
+                "_embedded" => [
+                    "contacts" => [[
+                        "first_name" => $data['name'],
+                        "custom_fields_values" => [[
+                            "field_id" => 367645,
+                            "values" => [[
+                                "value" => $data['tel'],
+                            ]]],
+                            [
+                                "field_id" => 369945,
+                                "values" => [[
+                                    "value" => "С сайта", // Источник
+                                ]],
+                            ]],
+                    ]],
+                    "tags" => [[
+                        "name" => "Bonus", // Тэг
+                    ]]
+                ]]
+        ]);
+    }
 
 
 }
