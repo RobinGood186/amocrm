@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+    nginx:
+        image: nginx:latest
+        volumes:
+            - ./_docker/nginx/:/etc/nginx/conf.d/
+            - ./:/var/www/
+            - /etc/letsencrypt/:/etc/letsencrypt/
+        ports:
+            - "8000:80"
+      #      - "443:443"
+        depends_on:
+            - app
+        container_name: nginx
+        links:
+            - app
+
+
+    app:
+        build:
+            context: .
+            dockerfile: _docker/app/Dockerfile
+        volumes:
+            - ./:/var/www/
+            - ./_docker/supervisor/conf.d/:/etc/supervisor/conf.d
+        container_name: app
+
+    db:
+        image: postgres:15
+        volumes:
+            - ./tmp/db:/var/lib/postgres
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=admin
+            - POSTGRES_DB=robin
+            - POSTGRES_PASSWORD=root
+        container_name: db
