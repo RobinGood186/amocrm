@@ -12,6 +12,9 @@ class StoreController extends BaseController
         $data = $request->validated(); // Валидация данных с формочки
         $user->createRequest($data); // Добавление в бд
 
+        $this->service->MethodLeadsComplex($data); // Отправка данных в АмосСРМ
+        $this->service->MethodTasks($data); // Добавление задачи в АмоСРМ
+
         return view('amocrm.index');
     }
 }
